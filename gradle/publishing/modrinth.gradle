@@ -7,7 +7,7 @@ modrinth {
     changelog = changelog_text
     uploadFile = file("build/libs/${remapJar.archiveBaseName.get()}-${version}.jar")
     gameVersions = [ minecraft_version ]
-    loaders = [ "fabric", "quilt" ]
+    loaders = [ "fabric"]
     dependencies {
         required.project("fabric-api")
     }

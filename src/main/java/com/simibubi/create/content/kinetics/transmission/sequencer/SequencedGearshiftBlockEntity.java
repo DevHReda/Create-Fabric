@@ -3,8 +3,7 @@ package com.simibubi.create.content.kinetics.transmission.sequencer;
 import java.util.List;
 import java.util.Vector;
 
-import com.simibubi.create.compat.computercraft.AbstractComputerBehaviour;
-import com.simibubi.create.compat.computercraft.ComputerCraftProxy;
+
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -26,7 +25,6 @@ public class SequencedGearshiftBlockEntity extends SplitShaftBlockEntity {
 	int timer;
 	boolean poweredPreviously;
 
-	public AbstractComputerBehaviour computerBehaviour;
 
 	public record SequenceContext(SequencerInstructions instruction, double relativeValue) {
 
@@ -70,7 +68,7 @@ public class SequencedGearshiftBlockEntity extends SplitShaftBlockEntity {
 	@Override
 	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
 		super.addBehaviours(behaviours);
-		behaviours.add(computerBehaviour = ComputerCraftProxy.behaviour(this));
+	//	behaviours.add(computerBehaviour = ComputerCraftProxy.behaviour(this));
 	}
 
 	@Override
@@ -115,8 +113,8 @@ public class SequencedGearshiftBlockEntity extends SplitShaftBlockEntity {
 	}
 
 	public void onRedstoneUpdate(boolean isPowered, boolean isRunning) {
-		if (computerBehaviour.hasAttachedComputer())
-			return;
+	/*	if (computerBehaviour.hasAttachedComputer())
+			return;*/
 		if (!poweredPreviously && isPowered)
 			risingFlank();
 		poweredPreviously = isPowered;

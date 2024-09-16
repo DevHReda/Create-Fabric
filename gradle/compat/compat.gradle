@@ -1,4 +1,4 @@
-List<String> testMods = Arrays.stream(test_mods.split(",")).map(String::trim).toList()
+/*List<String> testMods = Arrays.stream(test_mods.split(",")).map(String::trim).toList()
 if (testMods.size() == 1 && testMods.get(0) == "none")
     return
 testMods.forEach(mod -> {
@@ -8,3 +8,4 @@ testMods.forEach(mod -> {
         throw new IllegalArgumentException("Mod $mod has no compatibility script set up!")
     apply from: file
 })
+*/

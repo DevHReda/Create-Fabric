@@ -8,23 +8,24 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleOptions.Deserializer;
+//import net.minecraft.core.particles.ParticleOptions.Deserializer;
 import net.minecraft.core.particles.ParticleType;
 
 public interface ICustomParticleData<T extends ParticleOptions> {
 
-	Deserializer<T> getDeserializer();
+//	Deserializer<T> getDeserializer();
 
 	Codec<T> getCodec(ParticleType<T> type);
 
 	public default ParticleType<T> createType() {
-		return new ParticleType<T>(false, getDeserializer()) {
+		/*return new ParticleType<T>(false, getDeserializer()) {
 
 			@Override
 			public Codec<T> codec() {
 				return ICustomParticleData.this.getCodec(this);
 			}
-		};
+		};*/
+		return null;
 	}
 
 	@Environment(EnvType.CLIENT)

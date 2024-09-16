@@ -13,9 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.behaviour.BlockSpoutingBehaviour;
-import com.simibubi.create.compat.Mods;
-import com.simibubi.create.compat.computercraft.ComputerCraftProxy;
-import com.simibubi.create.compat.trinkets.Trinkets;
 import com.simibubi.create.content.contraptions.ContraptionMovementSetting;
 import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
 import com.simibubi.create.content.equipment.potatoCannon.BuiltinPotatoProjectileTypes;
@@ -139,8 +136,6 @@ public class Create implements ModInitializer {
 		AllBogeyStyles.register();
 		// ----
 
-		ComputerCraftProxy.register();
-
 		Milk.enableMilkFluid();
 		CopperRegistries.inject();
 
@@ -150,7 +145,6 @@ public class Create implements ModInitializer {
 
 		// causes class loading issues or something
 		// noinspection Convert2MethodRef
-		Mods.TRINKETS.executeIfInstalled(() -> () -> Trinkets.init());
 
 		// fabric exclusive
 		AllIngredients.register();
@@ -179,7 +173,7 @@ public class Create implements ModInitializer {
 	}
 
 	public static ResourceLocation asResource(String path) {
-		return new ResourceLocation(ID, path);
+		return ResourceLocation.fromNamespaceAndPath(ID, path);
 	}
 
 }

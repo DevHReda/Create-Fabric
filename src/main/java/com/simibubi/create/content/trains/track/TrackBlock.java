@@ -56,7 +56,6 @@ import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -92,8 +91,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -114,7 +111,7 @@ public class TrackBlock extends Block implements IBE<TrackBlockEntity>, IWrencha
 			.setValue(HAS_BE, false)
 			.setValue(WATERLOGGED, false));
 		this.material = material;
-		LandPathNodeTypesRegistry.register(this, BlockPathTypes.RAIL, null);
+	//	LandPathNodeTypesRegistry.register(this, BlockPath.RAIL, null);
 	}
 
 	@Override
@@ -182,16 +179,17 @@ public class TrackBlock extends Block implements IBE<TrackBlockEntity>, IWrencha
 	}
 
 	@Override
-	public void playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
+	public BlockState playerWillDestroy(Level pLevel, BlockPos pPos, BlockState pState, Player pPlayer) {
 		super.playerWillDestroy(pLevel, pPos, pState, pPlayer);
 		if (pLevel.isClientSide())
-			return;
+			return pState;
 		if (!pPlayer.isCreative())
-			return;
+			return pState;
 		withBlockEntityDo(pLevel, pPos, be -> {
 			be.cancelDrops = true;
 			be.removeInboundConnections(true);
 		});
+		return pState;
 	}
 
 	@Override

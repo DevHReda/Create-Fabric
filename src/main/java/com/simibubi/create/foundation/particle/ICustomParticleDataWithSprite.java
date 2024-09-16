@@ -9,21 +9,22 @@ import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.particle.ParticleEngine.SpriteParticleRegistration;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleOptions.Deserializer;
+//import net.minecraft.core.particles.ParticleOptions.Deserializer;
 import net.minecraft.core.particles.ParticleType;
 
 public interface ICustomParticleDataWithSprite<T extends ParticleOptions> extends ICustomParticleData<T> {
 
-	Deserializer<T> getDeserializer();
+	//Deserializer<T> getDeserializer();
 
 	public default ParticleType<T> createType() {
-		return new ParticleType<T>(false, getDeserializer()) {
+		/*return new ParticleType<T>(false, getDeserializer()) {
 
 			@Override
 			public Codec<T> codec() {
 				return ICustomParticleDataWithSprite.this.getCodec(this);
 			}
-		};
+		};*/
+		return null;
 	}
 
 	@Override

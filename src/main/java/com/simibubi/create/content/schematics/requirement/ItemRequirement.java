@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.simibubi.create.compat.framedblocks.FramedBlocksInSchematics;
 import com.simibubi.create.foundation.data.recipe.Mods;
 import com.simibubi.create.foundation.utility.NBTProcessors;
 
@@ -74,9 +73,6 @@ public class ItemRequirement {
 		if (be instanceof ISpecialBlockEntityItemRequirement specialBE)
 			requirement = requirement.union(specialBE.getRequiredItems(state));
 
-		if (com.simibubi.create.compat.Mods.FRAMEDBLOCKS.contains(block))
-			requirement = requirement.union(FramedBlocksInSchematics.getRequiredItems(state, be));
-
 		return requirement;
 	}
 
@@ -111,7 +107,7 @@ public class ItemRequirement {
 			return new ItemRequirement(new StrictNbtStackRequirement(bannerBE.getItem(), ItemUseType.CONSUME));
 		// Tall grass doesnt exist as a block so use 2 grass blades
 		if (block == Blocks.TALL_GRASS)
-			return new ItemRequirement(ItemUseType.CONSUME, new ItemStack(Items.GRASS, 2));
+			return new ItemRequirement(ItemUseType.CONSUME, new ItemStack(Items.TALL_GRASS, 2));
 		// Large ferns don't exist as blocks so use 2 ferns instead
 		if (block == Blocks.LARGE_FERN)
 			return new ItemRequirement(ItemUseType.CONSUME, new ItemStack(Items.FERN, 2));
@@ -197,7 +193,7 @@ public class ItemRequirement {
 
 		@Override
 		public boolean matches(ItemStack other) {
-			return ItemStack.isSameItemSameTags(stack, other);
+			return ItemStack.isSameItem(stack, other);
 		}
 
 		@Override
